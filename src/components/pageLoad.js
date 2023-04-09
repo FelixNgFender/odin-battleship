@@ -126,7 +126,8 @@ function loadGoogleFonts() {
   googleFonts2.href = "https://fonts.gstatic.com";
   googleFonts2.crossOrigin = "anonymous";
   const googleFonts3 = document.createElement("link");
-  googleFonts3.href = "https://fonts.googleapis.com/css2?family=Cute+Font&display=swap";
+  googleFonts3.href =
+    "https://fonts.googleapis.com/css2?family=Cute+Font&display=swap";
   googleFonts3.rel = "stylesheet";
   document.head.appendChild(googleFonts);
   document.head.appendChild(googleFonts2);
