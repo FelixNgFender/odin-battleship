@@ -6,8 +6,6 @@
 
 "use strict";
 
-import Ship from "./ship.js";
-
 /**
  * Creates a gameboard
  * @return {Object} Public API
@@ -45,13 +43,7 @@ export default function createGameboard() {
         }
       }
       positions.forEach((pos) => {
-        if (
-          board[pos[0]][pos[1]] !== null ||
-          pos[0] < 0 ||
-          pos[0] > board[0].length - 1 ||
-          pos[1] < 0 ||
-          pos[1] > board.length - 1
-        ) {
+        if (board[pos[0]][pos[1]] !== null || this.isPosOutOfBounds(pos)) {
           throw new Error("Invalid ship placement");
         }
       });
@@ -62,24 +54,30 @@ export default function createGameboard() {
       return;
     },
     receiveAttack(position) {
+      if (this.isPosOutOfBounds(position)) {
+        throw new Error("Position is out of bounds");
+      }
       if (board[position[0]][position[1]] === null) {
         board[position[0]][position[1]] = "M";
         return;
       }
-      if (board[position[0]][position[1]] instanceof Ship) {
+      if (board[position[0]][position[1]] instanceof Object) { 
         board[position[0]][position[1]].hit();
         board[position[0]][position[1]] = "H";
         return;
       }
-      if (
-        board[position[0]][position[1]] === "H" ||
-        board[position[0]][position[1]] === "M"
-      ) {
-        throw new Error("Invalid attack");
-      }
+      throw new Error("Position has already been attacked");
     },
     allShipsSunk() {
       return ships.every((ship) => ship.isSunk());
+    },
+    isPosOutOfBounds(position) {
+      return (
+        position[0] < 0 ||
+        position[0] > board[0].length - 1 ||
+        position[1] < 0 ||
+        position[1] > board.length - 1
+      );
     },
   };
   return publicAPI;

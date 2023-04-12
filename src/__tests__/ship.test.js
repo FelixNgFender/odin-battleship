@@ -15,18 +15,6 @@ describe("Ship functions", () => {
     testCarrier = createShip(5);
   });
 
-  test("Sunking works properly", () => {
-    expect(testCarrier.isSunk()).toBe(false);
-    testCarrier.hit();
-    expect(testCarrier.isSunk()).toBe(false);
-    testCarrier.hit();
-    testCarrier.hit();
-    testCarrier.hit();
-    expect(testCarrier.isSunk()).toBe(false);
-    testCarrier.hit();
-    expect(testCarrier.isSunk()).toBe(true);
-  });
-
   test("Sunking a sunk ship throws an error", () => {
     expect(() => {
       testCarrier.hit();
@@ -40,5 +28,19 @@ describe("Ship functions", () => {
 
   test("Length is correct", () => {
     expect(testCarrier.getLength()).toBe(5);
+  });
+
+  test("Hit works properly", () => {
+    expect(testCarrier.isSunk()).toBe(false);
+    testCarrier.hit();
+    expect(testCarrier.isSunk()).toBe(false);
+    testCarrier.hit();
+    expect(testCarrier.isSunk()).toBe(false);
+    testCarrier.hit();
+    expect(testCarrier.isSunk()).toBe(false);
+    testCarrier.hit();
+    expect(testCarrier.isSunk()).toBe(false);
+    testCarrier.hit();
+    expect(testCarrier.isSunk()).toBe(true);
   });
 });
