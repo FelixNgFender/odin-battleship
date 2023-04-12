@@ -82,3 +82,27 @@ export default function createGameboard() {
   };
   return publicAPI;
 }
+
+/**
+ * Create a gameboard component representing the gameboard object
+ * of a player
+ * @param {Object} gameboard Gameboard object
+ * @param {Object} player Player object
+ * @return {HTMLElement} Gameboard component
+ */
+export function createGameboardComponent(gameboard, player) {
+  const gameboardComponent = document.createElement("div");
+  gameboardComponent.id = "gameboard-" + player.getName();
+  const board = gameboard.getBoard();
+  for (let i = 0; i < board.length; ++i) {
+    for (let j = 0; j < board[0].length; ++j) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.dataset.row = i;
+      cell.dataset.col = j;
+      cell.dataset.player = player.getName();
+      gameboardComponent.appendChild(cell);
+    }
+  }
+  return gameboardComponent;
+}

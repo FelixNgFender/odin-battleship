@@ -52,6 +52,8 @@ export default function createGameLoop(player1, player2) {
       console.log("Player 1 wins!");
       return;
     },
+    play() {
+    }
   };
   return publicAPI;
 }
