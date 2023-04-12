@@ -67,7 +67,7 @@ describe("Gameboard functions", () => {
 
   test("Out of bounds attack throws an error", () => {
     expect(() => {
-      testGameboard.receiveAttack([-1 , 9]);
+      testGameboard.receiveAttack([-1, 9]);
     }).toThrow();
   });
 
@@ -95,7 +95,6 @@ describe("Gameboard functions", () => {
     testGameboard.receiveAttack([0, 4]);
     expect(testCarrier.isSunk()).toBe(true);
   });
-
 
   test("All ships are sunk works properly", () => {
     testGameboard.placeShip(testCarrier, [0, 0], true);

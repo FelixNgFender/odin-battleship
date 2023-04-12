@@ -61,7 +61,7 @@ export default function createGameboard() {
         board[position[0]][position[1]] = "M";
         return;
       }
-      if (board[position[0]][position[1]] instanceof Object) { 
+      if (board[position[0]][position[1]] instanceof Object) {
         board[position[0]][position[1]].hit();
         board[position[0]][position[1]] = "H";
         return;
