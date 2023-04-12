@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "jest",
-    "watch:test": "jest --watch",
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
+    "watch:test": "node --experimental-vm-modules ./node_modules/.bin/jest --watch",
     "lint:src": "prettier --write src && eslint src",
     "start": "webpack serve --open",
-    "watch": "webpack --watch",
+    "watch:webpack": "webpack --watch",
     "build": "webpack",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
+    "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
     "eslint": "^8.36.0",
