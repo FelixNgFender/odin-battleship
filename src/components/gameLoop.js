@@ -46,14 +46,13 @@ export default function createGameLoop(player1, player2) {
       console.table(player1.getGameboard().getBoard());
       console.table(player2.getGameboard().getBoard());
       if (player1.getGameboard().allShipsSunk()) {
-        console.log("Player 2 wins!");
+        console.log(player2.getName() + ", ye be the winner!");
         return;
       }
-      console.log("Player 1 wins!");
+      console.log(player1.getName() + ", ye be the winner!");
       return;
     },
-    play() {
-    }
+    play() {},
   };
   return publicAPI;
 }

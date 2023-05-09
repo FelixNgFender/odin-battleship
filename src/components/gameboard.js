@@ -6,6 +6,8 @@
 
 "use strict";
 
+import { toKebabCase } from "./utils.js";
+
 /**
  * Creates a gameboard
  * @return {Object} Public API
@@ -32,6 +34,9 @@ export default function createGameboard() {
       return ships;
     },
     placeShip(ship, position, isHorizontal) {
+      if (!this.canPlaceShip(ship.getLength(), position, isHorizontal)) {
+        throw new Error("Invalid ship placement");
+      }
       const positions = [];
       if (isHorizontal) {
         for (let i = 0; i < ship.getLength(); ++i) {
@@ -43,15 +48,25 @@ export default function createGameboard() {
         }
       }
       positions.forEach((pos) => {
-        if (board[pos[0]][pos[1]] !== null || this.isPosOutOfBounds(pos)) {
-          throw new Error("Invalid ship placement");
-        }
-      });
-      positions.forEach((pos) => {
         board[pos[0]][pos[1]] = ship;
       });
       ships.push(ship);
       return;
+    },
+    canPlaceShip(shipLength, position, isHorizontal) {
+      const positions = [];
+      if (isHorizontal) {
+        for (let i = 0; i < shipLength; ++i) {
+          positions.push([position[0], position[1] + i]);
+        }
+      } else {
+        for (let i = 0; i < shipLength; ++i) {
+          positions.push([position[0] + i, position[1]]);
+        }
+      }
+      return positions.every(
+        (pos) => board[pos[0]][pos[1]] === null && !this.isPosOutOfBounds(pos)
+      );
     },
     receiveAttack(position) {
       if (this.isPosOutOfBounds(position)) {
@@ -86,21 +101,23 @@ export default function createGameboard() {
 /**
  * Create a gameboard component representing the gameboard object
  * of a player
- * @param {Object} gameboard Gameboard object
  * @param {Object} player Player object
  * @return {HTMLElement} Gameboard component
  */
-export function createGameboardComponent(gameboard, player) {
-  const gameboardComponent = document.createElement("div");
-  gameboardComponent.id = "gameboard-" + player.getName();
+export function createGameboardComponent(player) {
+  const gameboard = player.getGameboard();
   const board = gameboard.getBoard();
+  const gameboardComponent = document.createElement("div");
+  const cleanName = toKebabCase(player.getName());
+  gameboardComponent.classList.add("gameboard");
+  gameboardComponent.id = "gameboard-" + cleanName;
   for (let i = 0; i < board.length; ++i) {
     for (let j = 0; j < board[0].length; ++j) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
       cell.dataset.row = i;
       cell.dataset.col = j;
-      cell.dataset.player = player.getName();
+      cell.dataset.player = cleanName;
       gameboardComponent.appendChild(cell);
     }
   }

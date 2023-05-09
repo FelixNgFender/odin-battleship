@@ -72,7 +72,7 @@ function main() {
   const main = document.createElement("main");
   main.classList.add("wideScreenWrapper");
   main.id = "wideScreenWrapper";
-  main.appendChild(createNameModalComponent()); 
+  main.appendChild(createNameModalComponent());
   return main;
 }
 
@@ -125,7 +125,8 @@ function loadGoogleFonts() {
   googleFonts2.crossOrigin = "anonymous";
   document.head.appendChild(googleFonts2);
   const googleFonts3 = document.createElement("link");
-  googleFonts3.href = "https://fonts.googleapis.com/css2?family=Pirata+One&display=swap";
+  googleFonts3.href =
+    "https://fonts.googleapis.com/css2?family=Pirata+One&display=swap";
   googleFonts3.rel = "stylesheet";
   document.head.appendChild(googleFonts3);
 }

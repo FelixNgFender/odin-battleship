@@ -6,6 +6,8 @@
 
 "use strict";
 
+export const BOT_NAME = "World Government";
+
 import pageLoad from "./components/pageLoad";
 import "./styles/styles-reset.css";
 import "./styles/styles.css";

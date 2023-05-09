@@ -1,12 +1,12 @@
 :root {
-  --primary-color: #c8472c;
+  --primary-color: 200, 71, 44;
   --secondary-color: #412a1e;
   --tertiary-color: #f8de3c;
-  --accent-color: #fefefe;
-  --foreground-color: #58acf4;
-  --text-color: #7cff6a;
+  --accent-color: 254, 254, 254;
+  --foreground-color: 88, 172, 244;
+  --text-color: 124, 255, 106;
   --link-color: #0b3075;
-  --hover-color: #105edd;
+  --hover-color: 16, 94, 221;
   --transparent: transparent;
   --border-radius: 0px;
   --spacing-xs: 5px;
@@ -44,7 +44,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color: var(--text-color);
+  color: rgba(var(--text-color), 1);
 }
 
 .wideScreenWrapper {
@@ -58,6 +58,57 @@ body {
   gap: var(--spacing-lg);
 }
 
+/* ANNOUNCER */
+.announcer {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: var(--spacing-lg);
+  background-image: url("../assets/images/woodPlank.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--secondary-color);
+  width: 100%;
+  grid-column: 1 / -1;
+}
+
+/* GAMEBOARD */
+.gameboard {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 1px;
+  align-content: center;
+}
+
+.gameboard:not(#gameboard-world-government) {
+  background-image: url("../assets/images/strawhat.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#gameboard-world-government {
+  background-image: url("../assets/images/worldGov.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background-color: rgba(var(--foreground-color), 0.8);
+}
+
+.cell.placeable {
+  background-color: rgba(var(--hover-color), 0.8);
+}
+
+.cell.unplaceable {
+  background-color: rgba(var(--primary-color), 0.8);
+}
+
+/* MODALS */
 .nameModal {
   display: flex;
   font-size: 1.5rem;
@@ -75,8 +126,8 @@ body {
   width: var(--input-width);
   border-radius: var(--border-radius);
   padding: var(--spacing-sm) var(--spacing-md);
-  background-color: var(--transparent);
-  color: var(--accent-color);
+  background-color: rgba(var(--accent-color), 0.5);
+  color: rgba(var(--text-color), 1);
   border: var(--border);
   outline: none;
 }
@@ -84,8 +135,8 @@ body {
 .nameSubmit {
   font-family: inherit;
   font-size: inherit;
-  background-color: var(--primary-color);
-  color: var(--accent-color);
+  background-color: rgba(var(--primary-color), 1);
+  color: rgba(var(--accent-color), 1);
   border: none;
   border-radius: var(--border-radius);
   padding: var(--spacing-sm) var(--spacing-md);
